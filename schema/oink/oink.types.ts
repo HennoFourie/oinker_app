@@ -3,5 +3,5 @@ export type schema = {
     profileId: string,
     createDate: Date,
     text: string,
-    images: Blob[]
+    image: null | string,
 }

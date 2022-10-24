@@ -1,5 +1,4 @@
-import { Shell } from "../Shell";
-import { MockContainer } from "../../../store/tests/store.mock";
+import { MockContainer } from "./Shell.mocks";
 
 export default {
   title: "views/Shell",
@@ -7,6 +6,6 @@ export default {
 
 export const Default = () => (
   <MockContainer>
-    <Shell active='feed'><div>123</div></Shell>
+    <div>123</div>
   </MockContainer>
 );

@@ -11,9 +11,28 @@ export const createApi = (): types.api => ({})
 
 export const createStore = (api: types.api): StoreApi<types.store> => {
     const store = createTypedStore(() => ({
+        phase: 'loading',
+        count: null,
         profile: null,
+        oinks: null,
     }))
+
+    const mount = async () => {
+        const [oinks, profile, { count }] = await Promise.all([
+            api.getOinks(),
+            api.getProfile(),
+            api.getOinksAggregates(),
+        ])
+
+        store.setState({
+            oinks,
+            count,
+            profile,
+            phase: 'resting',
+        })
+    }
     
+    mount()
     return store
 }
 

@@ -5,15 +5,15 @@ export type oink = {
     profileId: string,
     createDate: Date,
     text: string,
-    images: Blob[]
+    images: string[]
 }
 
 export type profile = {
     key: string,
     displayName: null | string,
     bio: null | string,
-    coverImg: Blob,
-    profileImg: Blob,
+    coverImg: string,
+    profileImg: string,
     followerIds: string[],
     followingIds: string[],
     oinkIds: string[]

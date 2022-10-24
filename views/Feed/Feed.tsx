@@ -2,12 +2,11 @@ import { useContext } from "react";
 import styled from "@emotion/styled";
 import { useStore } from "zustand";
 import { context } from "./Feed.store";
-import { Oink, Placeholder } from "./Feed.Oink";
+import { Oink, Placeholder } from "./../../components/Oink";
 import { Shell } from "../Shell";
-import { oink } from "./Feed.types";
 
 const List = styled.ul`
-  margin: 4rem 2rem;
+  margin: 2rem 1rem 4rem 1rem;
   padding: 0;
   list-style: none;
 `;
@@ -15,6 +14,20 @@ const List = styled.ul`
 const Item = styled.li`
   margin: 0.5rem 0;
 `;
+
+const PlaceholderList = () => {
+  return (
+    <>
+      {[1, 2, 3, 4, 5, 6].map((id) => {
+        return (
+          <Item key={id}>
+            <Placeholder />
+          </Item>
+        );
+      })}
+    </>
+  );
+};
 
 export const Content = () => {
   const store = useContext(context);
@@ -24,28 +37,7 @@ export const Content = () => {
   const profiles = useStore(store, (state) => state.profiles);
 
   if (phase === "loading") {
-    return (
-      <>
-        <Item>
-          <Placeholder />
-        </Item>
-        <Item>
-          <Placeholder />
-        </Item>
-        <Item>
-          <Placeholder />
-        </Item>
-        <Item>
-          <Placeholder />
-        </Item>
-        <Item>
-          <Placeholder />
-        </Item>
-        <Item>
-          <Placeholder />
-        </Item>
-      </>
-    );
+    return <PlaceholderList />;
   }
 
   if (!feed) {
@@ -58,27 +50,31 @@ export const Content = () => {
 
   return (
     <>
-      {feed.map(({ key, text, profileId }) => {
+      {feed.map(({ key, text, profileId, createDate, image }) => {
         const profile = profiles.find(({ key }) => key === profileId);
         if (!profile) throw new Error("Profile does not exist");
 
         return (
           <Item key={key}>
             <Oink
+              date={createDate}
               text={text}
               name={profile.displayName || ""}
-              imageUrl="https://picsum.photos/200/300"
+              imageUrl={profile.profileImg}
+              embedImage={image}
             />
           </Item>
         );
       })}
+
+      <PlaceholderList />
     </>
   );
 };
 
 export const Feed = () => {
   return (
-    <Shell active="feed">
+    <Shell active="feed" title="Home">
       <List>
         <Content />
       </List>

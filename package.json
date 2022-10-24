@@ -11,6 +11,9 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.12.0",
+    "@auth0/auth0-spa-js": "^1.22.5",
+    "@auth0/nextjs-auth0": "^1.9.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@faker-js/faker": "^7.5.0",
@@ -20,6 +23,7 @@
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-use": "^17.4.0",
     "zustand": "^4.1.1"
   },
   "devDependencies": {

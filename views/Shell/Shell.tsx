@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import styled from "@emotion/styled";
+import { ArrowBack as ArrowIcon } from '@mui/icons-material'
 import * as types from "./Shell.types";
 import {
   AccountCircle as ProfileIcon,
@@ -10,17 +10,15 @@ import {
   Typography,
   BottomNavigation,
   BottomNavigationAction,
-  CssBaseline,
+  IconButton,
 } from "@mui/material";
-import "./Shell.styles.css";
-import { useStore } from "zustand";
-import { context } from "./Shell.store";
 
 const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: 3.5rem;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
@@ -56,11 +54,19 @@ const Wrapper = styled.div`
   border: 1px solid transparent;
 `
 
-const Header = () => {
+const Main = styled.main`
+  padding-top: 3.5rem;
+`
+
+const Header = (props: { title: string }) => {
+  const { title } = props
+
   return (
     <HeaderWrapper>
-      <Image src="https://picsum.photos/200/300" alt="" />
-      <Title>Home</Title>
+      {title !== "Profile" && (<Image src="https://picsum.photos/200/300" alt="" />)}
+
+      {title === "Profile" && <IconButton><ArrowIcon /></IconButton>}
+      <Title>{title}</Title>
     </HeaderWrapper>
   );
 };
@@ -88,18 +94,13 @@ const Footer = (props: { active: types.active }) => {
 };
 
 export const Shell = (props: types.props) => {
-  const { children, active } = props;
-
-  const store = useContext(context);
-  const state = useStore(store, (state) => state);
+  const { children, active, title } = props;
 
   return (
     <>
-      <CssBaseline />
-
       <Wrapper>
-        <Header />
-        <main>{children}</main>
+        <Header title={title} />
+        <Main>{children}</Main>
         <Footer active={active} />
       </Wrapper>
     </>

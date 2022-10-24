@@ -16,6 +16,7 @@ const API: types.api = {
             profileIds: profileIds,
         }))
     ),
+    
     getProfiles: async () => mockPromise<types.profile.schema[]>(
         profileIds.map((id) => createMockProfile({ id }))
     ),

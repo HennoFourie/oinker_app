@@ -7,12 +7,6 @@ export type api = {
     getProfiles: () => Promise<profile.schema[]>
 }
 
-export type oinkProps = {
-    imageUrl: string,
-    text: string,
-    name: string,
-}
-
 export namespace phases {
     export type loading = {
         phase: 'loading',

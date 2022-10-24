@@ -1,9 +1,9 @@
 export type schema = {
     key: string,
-    displayName: null | string,
+    displayName: string,
     bio: null | string,
-    coverImg: Blob,
-    profileImg: Blob,
+    coverImg: string,
+    profileImg: string,
     followerIds: string[],
     followingIds: string[],
     oinkIds: string[]
